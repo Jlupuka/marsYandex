@@ -186,7 +186,32 @@ def choice(planet_name: str):
                     <h1>Мое предложение: {planet_name}</h1>
                     {'\n'.join(choice_text)}
                   </body>
-                  
+                </html>'''
+
+
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
+def results(nickname: str, level: int, rating: float):
+    return f'''<!doctype html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                   <link rel="stylesheet"
+                   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                   integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                   crossorigin="anonymous">
+                    <title>Варианты выбора</title>
+                  </head>
+                  <body>
+                    <h1>Результаты отбора</h1>
+                    <h2>Претендента на участие в миссии {nickname}</h2>
+                    <div class="{alerts[2]}" role="alert">
+                        Поздравляем! Ваш рейтинг после {level} этапа отбора составляет {rating}!
+                    </div>
+                    <div class="{alerts[4]}" role="alert">
+                        Желаем удачи!
+                    </div>
+                  </body>
                 </html>'''
 
 
