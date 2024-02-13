@@ -89,7 +89,7 @@ def promotion_image():
     return title
 
 
-@app.route('/form_sample', methods=['POST', 'GET'])
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
         checkBox = [(f'<div class="form-group form-check">\n  '
