@@ -1,6 +1,7 @@
-from flask import Flask
-from flask import url_for
-from flask import request
+import os
+
+from flask import Flask, render_template, request, url_for
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -213,6 +214,21 @@ def results(nickname: str, level: int, rating: float):
                     </div>
                   </body>
                 </html>'''
+
+
+@app.route('/load_photo', methods=['POST', 'GET'])
+def load_photo():
+    if request.method == 'POST':
+        image = request.files['image']
+        if image and allowed_file(image.filename):
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('static/img', filename))
+            return render_template('upload_image.html', image=filename)
+    return render_template('upload_image.html')
+
+
+def allowed_file(filename: str) -> bool:
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ['jpg', 'jpeg', 'png']
 
 
 if __name__ == '__main__':

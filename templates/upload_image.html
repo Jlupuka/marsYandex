@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка фотографии</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Загрузка фотографии</h1>
+    <h2>для участия в миссии</h2>
+    <form class="load_photo" action="{{ url_for('load_photo') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="image">Приложите фотографию</label>
+            <input type="file" class="form-control-file" id="image" name="image">
+        </div>
+        {% if image %}
+        <img src="{{ url_for('static', filename='img/' ~ image) }}" alt="Загруженная фотография" class="img-fluid">
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+</body>
+</html>
