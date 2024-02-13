@@ -28,6 +28,12 @@ professions = ('инженер-исследователь, '
                'инженер жизнеобеспечения, '
                'метеоролог, оператор марсохода,'
                ' киберинженер, штурман, пилот дронов').split(', ')
+choiceText = [
+    'Эта планета близка к Земле;',
+    'На ней много необходимых ресурсов;',
+    'На ней есть вода и атмосфера;',
+    'На ней есть небольшое магнитное поле;',
+    'Наконец, она просто красива!']
 
 
 @app.route('/')
@@ -159,6 +165,29 @@ def form_sample():
     elif request.method == 'POST':
         print(request.json)
         return "Форма отправлена"
+
+
+@app.route('/choice/<planet_name>')
+def choice(planet_name: str):
+    choice_text = [f'<div class="{alert}" role="alert">\n{line}\n</div>'
+                   for line, alert in zip(choiceText, alerts)]
+    return f'''<!doctype html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                   <link rel="stylesheet"
+                   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                   integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                   crossorigin="anonymous">
+                    <title>Варианты выбора</title>
+                  </head>
+                  <body>
+                    <h1>Мое предложение: {planet_name}</h1>
+                    {'\n'.join(choice_text)}
+                  </body>
+                  
+                </html>'''
 
 
 if __name__ == '__main__':
