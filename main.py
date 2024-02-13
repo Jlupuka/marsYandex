@@ -231,5 +231,10 @@ def allowed_file(filename: str) -> bool:
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ['jpg', 'jpeg', 'png']
 
 
+@app.route('/carousel')
+def gallery():
+    return render_template('gallery.html')
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
